@@ -1,42 +1,40 @@
-import Form from "react-bootstrap/Form";
+import PositionViewElement from './PositionViewElement';
 
-let formatter = new Intl.NumberFormat('en-US',{style: 'currency',currency:'USD'});
+function Position(props) {
+  
+  let positionElements = [];
 
-function Position() {
+  Object.keys(props.positionData).forEach(key => {
+    let posElementType = null;
+    switch(key){
+      case 'ticker':
+        posElementType = 'title'
+        break;
+      case 'status':
+        posElementType = 'text'
+        break;
+      case 'openDate':
+        posElementType = 'date'
+        break;
+      case 'price':
+        posElementType = 'currency'                             
+        break;
+      default:
+        posElementType = 'number'
+      }
+      positionElements.push(<PositionViewElement 
+        elementType={posElementType}
+        data = {props.positionData[key]}
+        key = {key}></PositionViewElement>);
+    
+    // console.log(key, props.positionData[key]);
+  });
+  // console.log(positionElements)
   return (
     <div className="card" >
-      <div className="cardElement">
-        <Form.Control type="date" name="Opened"></Form.Control>
-      </div>
-      <div className="cardElement">
-        <input type='text' textAlign={'center'}  placeholder="Ticker"></input>
-      </div>
-     
-      <div className="cardElement">
-        <select type='dropdown' >
-          <option value={'Put'}>Put</option>
-          <option value={'Call'}>Call</option>
-        </select>
-      </div>
-      <div className="cardElement">
-        <select type='dropdown' >
-          <option value={'Sell'}>Sell</option>
-          <option value={'Buy'}>Buy</option>
-        </select>
-      </div>
-
-      <div className="cardElement">
-        <Form.Control type="date" name="Expiration"></Form.Control>
-      </div>
-
-      <div className="cardElement">
-        {/* Current price will use an API to query the current stock price. */}
-        <text type='currency' >{ formatter.format(1) }</text>
-      </div>
-
-      <div className="cardElement">
-        <span>$<input type="text" name="StrikePrice" placeholder="Strike Price"></input></span>
-      </div>
+      {positionElements.map((item,index)=>{
+        return item;
+      })}
     </div>
   );
 } 
