@@ -35,6 +35,7 @@ function Position(props) {
       {positionElements.map((item,index)=>{
         return item;
       })}
+      
     </div>
   );
 } 

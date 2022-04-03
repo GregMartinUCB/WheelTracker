@@ -53,6 +53,14 @@ code {
 
 }
 
-.dateInput{
-
+.myButton{
+  background:url(./images/Plus_symbol.png) no-repeat;
+  background-size: 100%;
+  cursor:pointer;
+  border:none;
+  min-width: 75px;
+  min-height: 75px;
+}
+.myButton:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
